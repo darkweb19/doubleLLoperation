@@ -16,6 +16,21 @@ void insertHead(struct node** head , int data){
     newNode ->next = (*head);
     (*head) = newNode;
 }
+//insertion in between...
+void insertBetween(struct node **head , int data , int index){
+    struct node * newNode  , *temp = (*head);
+    newNode = (struct node *) malloc (sizeof(struct node));
+    newNode ->data = data ;
+    int i = 0 ;
+    while(i != index -1){
+        temp = temp ->next ;
+        i++ ;
+    }
+    newNode ->next = temp ->next ;
+    newNode ->prev = temp ;
+    temp ->next = newNode ;
+    newNode ->next ->prev = newNode ;
+}
 //insertion at tail ...
 void insertTail(struct node ** head , int data){
     struct node * newNode ;
@@ -66,9 +81,10 @@ int main(){
     //calling function
     insertHead(&head , 10);
     insertTail(&head , 20);
-    insertTail(&head , 30);
     insertTail(&head , 40);
     insertTail(&head , 50);
+    insertTail(&head , 60);
+    insertBetween(&head ,30,2 );
     // display(head);
     printBack(head);
     return 0;
